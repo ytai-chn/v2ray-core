@@ -25,8 +25,8 @@ func dialhttpUpgrade(ctx context.Context, dest net.Destination, streamSettings *
 		return nil, err
 	}
 
-	req.Header.Set("MyConnection", "upgrade")
-	req.Header.Set("MyUpgrade", "websocket")
+	req.Header.Set("Myconnection", "upgrade")
+	req.Header.Set("Myupgrade", "websocket")
 	req.Host = transportConfiguration.Host
 
 	err = req.Write(conn)
@@ -41,8 +41,8 @@ func dialhttpUpgrade(ctx context.Context, dest net.Destination, streamSettings *
 	}
 
 	if resp.Status == "101 Switching Protocols" &&
-		strings.ToLower(resp.Header.Get("MyUpgrade")) == "websocket" &&
-		strings.ToLower(resp.Header.Get("MyConnection")) == "upgrade" {
+		strings.ToLower(resp.Header.Get("Myupgrade")) == "websocket" &&
+		strings.ToLower(resp.Header.Get("Myconnection")) == "upgrade" {
 		return conn, nil
 	}
 	return nil, newError("unrecognized reply")
