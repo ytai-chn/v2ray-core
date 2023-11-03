@@ -31,8 +31,8 @@ func (s *server) Handle(conn net.Conn) (internet.Connection, error) {
 	if err != nil {
 		return nil, err
 	}
-	connection := strings.ToLower(req.Header.Get("MyConnection"))
-	upgrade := strings.ToLower(req.Header.Get("MyUpgrade"))
+	connection := strings.ToLower(req.Header.Get("Myconnection"))
+	upgrade := strings.ToLower(req.Header.Get("Myupgrade"))
 	if connection != "upgrade" || upgrade != "websocket" {
 		_ = conn.Close()
 		return nil, newError("unrecognized request")
@@ -45,8 +45,8 @@ func (s *server) Handle(conn net.Conn) (internet.Connection, error) {
 		ProtoMinor: 1,
 		Header:     http.Header{},
 	}
-	resp.Header.Set("MyConnection", "upgrade")
-	resp.Header.Set("MyUpgrade", "websocket")
+	resp.Header.Set("Myconnection", "upgrade")
+	resp.Header.Set("Myupgrade", "websocket")
 	err = resp.Write(conn)
 	if err != nil {
 		_ = conn.Close()
