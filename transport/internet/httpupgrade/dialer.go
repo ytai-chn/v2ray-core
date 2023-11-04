@@ -40,7 +40,7 @@ func dialhttpUpgrade(ctx context.Context, dest net.Destination, streamSettings *
 		return nil, err
 	}
 
-	if resp.Status == "101 Switching Protocols" &&
+	if resp.StatusCode == 200 &&
 		strings.ToLower(resp.Header.Get("Myupgrade")) == "websocket" &&
 		strings.ToLower(resp.Header.Get("Myconnection")) == "upgrade" {
 		return conn, nil
