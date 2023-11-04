@@ -38,8 +38,8 @@ func (s *server) Handle(conn net.Conn) (internet.Connection, error) {
 		return nil, newError("unrecognized request")
 	}
 	resp := &http.Response{
-		Status:     "101 Switching Protocols",
-		StatusCode: 101,
+		Status:     "200 OK",
+		StatusCode: 200,
 		Proto:      "HTTP/1.1",
 		ProtoMajor: 1,
 		ProtoMinor: 1,
